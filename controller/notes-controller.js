@@ -20,27 +20,12 @@ const fetchAllNote = async (req, res) => {
   }
 }
 
-// const fetchOneNote = async (req, res) => {
-//   try {
-//     const note = await Note.findOne({ _id: req.params.id })
-//     if (note.userId === req.user.userId) {
-//       const note = await Note.findOne({ _id: req.params.id })
-//       res.status(200).json(note)
-//     } else {
-//       res.status(400).json({ message: "You don't have Authorization " })
-//     }
-//   } catch (error) {
-//     console.log(error)
-//     res.status(500).json({ message: "Internal Server Error " })
-//   }
-// }
-
 const deleteNote = async (req, res) => {
   try {
     const note = await Note.findOne({ _id: req.params.id })
     if (note.userId === req.user.userId) {
       const deleteNote = await Note.deleteOne({ _id: req.params.id })
-      res.status(200).json({ message: "Note deleted Successfully " })
+      res.status(200).json({ message: "Note deleted ! " })
     } else {
       res.status(400).json({ message: "You don't have Authorization " })
     }
@@ -54,7 +39,7 @@ const editNote = async (req, res) => {
   const note = await Note.findOne({ _id: req.params.id })
   if (note.userId === req.user.userId) {
     const result = await Note.updateOne({ _id: req.params.id }, { $set: { ...req.body } })
-    res.status(200).json({ message: "Note Updated Successfully " })
+    res.status(200).json({ message: "Note Updated ! " })
   } else {
     res.status(400).json({ message: "You don't have Authorization " })
   }
